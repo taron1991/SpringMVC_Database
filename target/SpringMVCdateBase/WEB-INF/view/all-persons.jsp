@@ -5,18 +5,18 @@
 <table align="center">
     <tr>
         <th>Name</th>
-        <th>Surname</th>
-        <th>salary</th>
+        <th>Id</th>
+        <th>Age</th>
     </tr>
 
     <c:forEach var="person" items="${persons}">
 
-        <c:url var="updateButton" value="/pc/findPersons">
-            <c:param name="personId" value="${person.id}"/>
+        <c:url var="updateButton" value="/pc/updatePerson">
+            <c:param name="person_id" value="${person.id}"/>
         </c:url>
 
         <c:url var="deleteButton" value="/pc/deletePerson">
-            <c:param name="personId" value="${person.id}"/>
+            <c:param name="id" value="${person.id}"/>
         </c:url>
 
         <tr>
@@ -34,6 +34,11 @@
 
 </table>
 
+<br>
+
+<p align="center"> <input type="button" style="color: aqua" value="addPerson" onclick="window.location.href='/pc/createPerson'">
+
+</p>
 
 </body>
 </html>

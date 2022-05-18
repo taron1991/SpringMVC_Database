@@ -54,20 +54,4 @@ public class PersonController {
         return "redirect:/pc/findPersons";
     }
 
-    @RequestMapping("/ages")
-    public String agesGap(@RequestParam("req") int param, @RequestParam("sighn") String sighn, Model model) {
-
-        List<Person> person;
-
-        switch (sighn) {
-            case "<" -> person = personService.showPersonLess(param);
-            case ">" -> person = personService.showPersonMore(param);
-            default -> throw new IllegalStateException("error");
-        }
-
-        model.addAttribute("sig", person);
-        return "less_view";
-    }
-
-
 }

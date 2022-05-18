@@ -47,4 +47,16 @@ public class PersonService {
     }
 
 
+    public List<Person> showPersonLess(int param){
+        List<Person> person = personRepository.showLess(param);
+        return person;
+    }
+
+
+    public List<Person> showPersonMore(int param){
+        List<Person> person = personRepository.showMore(param);
+        return person;
+    }
+
+
 }

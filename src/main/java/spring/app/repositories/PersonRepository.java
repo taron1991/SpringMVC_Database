@@ -64,4 +64,25 @@ public class PersonRepository {
         session.close();
         return person;
     }
+
+
+    public List<Person> showLess(int param){
+        try( Session session = sessionFactory.openSession()){
+            session.getTransaction().begin();
+            Query query = session.createQuery("from Person where age<:param");
+            List list = query.setParameter("param", param).getResultList();
+            session.getTransaction().commit();
+            return list;
+        }
+    }
+
+    public List<Person> showMore(int param){
+        try( Session session = sessionFactory.openSession()){
+            session.getTransaction().begin();
+            Query query = session.createQuery("from Person where age>:param");
+            List list = query.setParameter("param", param).getResultList();
+            session.getTransaction().commit();
+            return list;
+        }
+    }
 }

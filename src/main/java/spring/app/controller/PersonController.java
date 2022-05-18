@@ -1,13 +1,10 @@
 package spring.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import spring.app.models.Person;
-import spring.app.repositories.PersonRepository;
 import spring.app.services.PersonService;
 
 import java.util.List;
@@ -45,9 +42,9 @@ public class PersonController {
     }
 
     @RequestMapping("/updatePerson")
-    public String updatePerson(@RequestParam("person_id") int id,Model model) {
+    public String updatePerson(@RequestParam("person_id") int id, Model model) {
         Person person = personService.getPerson(id);
-        model.addAttribute("person",person);
+        model.addAttribute("person", person);
         return "person-info";
     }
 
@@ -55,6 +52,21 @@ public class PersonController {
     public String deletePerson(@RequestParam("id") Integer id) {
         personService.deletePerson(id);
         return "redirect:/pc/findPersons";
+    }
+
+    @RequestMapping("/ages")
+    public String agesGap(@RequestParam("req") int param, @RequestParam("sighn") String sighn, Model model) {
+
+        List<Person> person;
+
+        switch (sighn) {
+            case "<" -> person = personService.showPersonLess(param);
+            case ">" -> person = personService.showPersonMore(param);
+            default -> throw new IllegalStateException("error");
+        }
+
+        model.addAttribute("sig", person);
+        return "less_view";
     }
 
 
